@@ -12,7 +12,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import common.dataBaseProcess;
+import common.DataProcess;
 import com.hankcs.hanlp.corpus.tag.Nature;
 import com.hankcs.hanlp.seg.common.Term;
 import com.hankcs.hanlp.tokenizer.NLPTokenizer;
@@ -66,17 +66,17 @@ public class ExtractEntityMethod {
    * 即实意词用APTO替换掉,并记录该抽取的是哪类实意词
    */
   public static String extractSignificanceAndSaveOthersFromSentence(String sentence) {
-	List<Term> termList = NLPTokenizer.segment(sentence);
-	StringBuffer result = new StringBuffer();
-	if (termList != null) {
-	  int len = termList.size();
-	  for (int i = 0; i < len; i++) {
-	    Term one = termList.get(i);
-		//前缀实意词
-		String pref = getSignificancePOSPrefix(one.nature);
-		if (!pref.equals("default")) {
-		  result.append("[" + pref + "]=");
-		} else {
+    List<Term> termList = NLPTokenizer.segment(sentence);
+    StringBuffer result = new StringBuffer();
+    if (termList != null) {
+      int len = termList.size();
+      for (int i = 0; i < len; i++) {
+        Term one = termList.get(i);
+        //前缀实意词
+        String pref = getSignificancePOSPrefix(one.nature);
+        if (!pref.equals("default")) {
+          result.append("[" + pref + "]=");
+        } else {
 		  //前缀为空,看全部
 		  String all = getSignificancePOSAll(one.nature);
 		  if (!all.equals("default")) {

@@ -104,7 +104,7 @@ public class ComputeWordStatic {
     for (int doc = 0; doc < totalDocs; doc++) {
       List<Word> docWords = corpus.get(doc);
       int docWordCount = docWords.size();
-	  //每个词遍历,记录词性
+      //每个词遍历,记录词性
       for (int toWord = 0; toWord < docWordCount; toWord++) {
         String tag = docWords.get(toWord).getWordTag();
         Word word = docWords.get(toWord);
