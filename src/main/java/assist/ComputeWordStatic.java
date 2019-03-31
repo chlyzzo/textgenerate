@@ -72,7 +72,7 @@ public class ComputeWordStatic {
   public static Map<Word, Integer> tf(List<List<Word>> corpus) {
     Map<Word,Integer> result = new HashMap<>();
     int totalDocs = corpus.size();
-	//每篇文档遍历词
+    //每篇文档遍历词
     for (int doc = 0; doc < totalDocs; doc++) {
       List<Word> docWords = corpus.get(doc);
       int docWordCount = docWords.size();
@@ -80,10 +80,10 @@ public class ComputeWordStatic {
       for (int toWord = 0; toWord < docWordCount; toWord++) {
         if (result.keySet().contains(docWords.get(toWord))) {
           result.put(docWords.get(toWord), result.get(docWords.get(toWord)) + 1);
-	    } else {
-		  result.put(docWords.get(toWord), 1);
-		}
-	  }//end one document,
+        } else {
+          result.put(docWords.get(toWord), 1);
+        }
+      }//end one document,
     }
     //对结果按照value排序
     MapSoredClass<Word> mapsored = new MapSoredClass<Word>();
@@ -100,32 +100,32 @@ public class ComputeWordStatic {
   public static Map<String,Map<Word,Integer>> tagWordtf(List<List<Word>> corpus) {
     Map<String,Map<Word,Integer>> result = new HashMap<>();
     int totalDocs = corpus.size();
-	//每篇文档遍历词
+    //每篇文档遍历词
     for (int doc = 0; doc < totalDocs; doc++) {
 	  List<Word> docWords = corpus.get(doc);
 	  int docWordCount = docWords.size();
 	  //每个词遍历,记录词性
 	  for (int toWord = 0; toWord < docWordCount; toWord++) {
-		String tag = docWords.get(toWord).getWordTag();
-		Word word = docWords.get(toWord);
+        String tag = docWords.get(toWord).getWordTag();
+        Word word = docWords.get(toWord);
 		if (result.keySet().contains(tag)) {			    	
 		  Map<Word, Integer> alreadyWords = result.get(tag);
 		  //词性下的词是否已经存在
 		  if (alreadyWords.keySet().contains(word)) {
-			alreadyWords.put(word, alreadyWords.get(word) + 1);
+            alreadyWords.put(word, alreadyWords.get(word) + 1);
 		  } else {
-			alreadyWords.put(word, 1);
+            alreadyWords.put(word, 1);
 		  }
 		  result.put(tag, alreadyWords);
-	    } else {
-	      Map<Word, Integer> alreadyWords = new HashMap<>();
-		  alreadyWords.put(word, 1);
-		  result.put(tag, alreadyWords);
+       } else {
+	     Map<Word, Integer> alreadyWords = new HashMap<>();
+         alreadyWords.put(word, 1);
+         result.put(tag, alreadyWords);
 	    }
 	  }//end one document,
 	}
     //对结果按照value排序,需进行遍历
-    for (String tag: result.keySet()){
+    for (String tag: result.keySet()) {
       Map<Word, Integer> tagWords = result.get(tag);
       MapSoredClass<Word> mapsored = new MapSoredClass<Word>();
       mapsored.map = tagWords;
