@@ -102,28 +102,28 @@ public class ComputeWordStatic {
     int totalDocs = corpus.size();
     //每篇文档遍历词
     for (int doc = 0; doc < totalDocs; doc++) {
-	  List<Word> docWords = corpus.get(doc);
-	  int docWordCount = docWords.size();
+      List<Word> docWords = corpus.get(doc);
+      int docWordCount = docWords.size();
 	  //每个词遍历,记录词性
-	  for (int toWord = 0; toWord < docWordCount; toWord++) {
+      for (int toWord = 0; toWord < docWordCount; toWord++) {
         String tag = docWords.get(toWord).getWordTag();
         Word word = docWords.get(toWord);
-		if (result.keySet().contains(tag)) {			    	
-		  Map<Word, Integer> alreadyWords = result.get(tag);
-		  //词性下的词是否已经存在
-		  if (alreadyWords.keySet().contains(word)) {
+        if (result.keySet().contains(tag)) {			    	
+          Map<Word, Integer> alreadyWords = result.get(tag);
+          //词性下的词是否已经存在
+          if (alreadyWords.keySet().contains(word)) {
             alreadyWords.put(word, alreadyWords.get(word) + 1);
-		  } else {
+          } else {
             alreadyWords.put(word, 1);
-		  }
-		  result.put(tag, alreadyWords);
-       } else {
-	     Map<Word, Integer> alreadyWords = new HashMap<>();
-         alreadyWords.put(word, 1);
-         result.put(tag, alreadyWords);
-	    }
-	  }//end one document,
-	}
+          }
+          result.put(tag, alreadyWords);
+        } else {
+          Map<Word, Integer> alreadyWords = new HashMap<>();
+          alreadyWords.put(word, 1);
+          result.put(tag, alreadyWords);
+        }
+      }//end one document,
+    }
     //对结果按照value排序,需进行遍历
     for (String tag: result.keySet()) {
       Map<Word, Integer> tagWords = result.get(tag);
