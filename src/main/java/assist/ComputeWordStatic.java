@@ -35,8 +35,8 @@ public class ComputeWordStatic {
    * 训练文本格式,文档id=word2[]word2[]word3[]...[],
    */
   public static Map<String, Integer> tf(String file) {
-	Map<String,Integer> result = new HashMap<>();
-	InputStreamReader inputReader = null;
+    Map<String,Integer> result = new HashMap<>();
+    InputStreamReader inputReader = null;
     BufferedReader bufferReader = null;
     try {
       InputStream inputStream = new FileInputStream(file);
@@ -73,23 +73,23 @@ public class ComputeWordStatic {
     Map<Word,Integer> result = new HashMap<>();
     int totalDocs = corpus.size();
 	//每篇文档遍历词
-	for (int doc = 0; doc < totalDocs; doc++) {
-	  List<Word> docWords = corpus.get(doc);
-	  int docWordCount = docWords.size();
-	  //每个词遍历
-	  for (int toWord = 0; toWord < docWordCount; toWord++) {
-		if (result.keySet().contains(docWords.get(toWord))) {
-		  result.put(docWords.get(toWord), result.get(docWords.get(toWord)) + 1);
+    for (int doc = 0; doc < totalDocs; doc++) {
+      List<Word> docWords = corpus.get(doc);
+      int docWordCount = docWords.size();
+      //每个词遍历
+      for (int toWord = 0; toWord < docWordCount; toWord++) {
+        if (result.keySet().contains(docWords.get(toWord))) {
+          result.put(docWords.get(toWord), result.get(docWords.get(toWord)) + 1);
 	    } else {
 		  result.put(docWords.get(toWord), 1);
 		}
 	  }//end one document,
     }
     //对结果按照value排序
-	MapSoredClass<Word> mapsored = new MapSoredClass<Word>();
-	mapsored.map = result;
-	result = mapsored.getSortedDesc(true);
-	return result;
+    MapSoredClass<Word> mapsored = new MapSoredClass<Word>();
+    mapsored.map = result;
+    result = mapsored.getSortedDesc(true);
+    return result;
   }
 	
   /**
@@ -99,9 +99,9 @@ public class ComputeWordStatic {
    */
   public static Map<String,Map<Word,Integer>> tagWordtf(List<List<Word>> corpus) {
     Map<String,Map<Word,Integer>> result = new HashMap<>();
-	int totalDocs = corpus.size();
+    int totalDocs = corpus.size();
 	//每篇文档遍历词
-	for (int doc = 0; doc < totalDocs; doc++) {
+    for (int doc = 0; doc < totalDocs; doc++) {
 	  List<Word> docWords = corpus.get(doc);
 	  int docWordCount = docWords.size();
 	  //每个词遍历,记录词性
@@ -126,11 +126,11 @@ public class ComputeWordStatic {
 	}
     //对结果按照value排序,需进行遍历
     for (String tag: result.keySet()){
-	  Map<Word, Integer> tagWords = result.get(tag);
-	  MapSoredClass<Word> mapsored = new MapSoredClass<Word>();
-	  mapsored.map = tagWords;
-	  tagWords = mapsored.getSortedDesc(true);
-	  result.put(tag, tagWords);
+      Map<Word, Integer> tagWords = result.get(tag);
+      MapSoredClass<Word> mapsored = new MapSoredClass<Word>();
+      mapsored.map = tagWords;
+      tagWords = mapsored.getSortedDesc(true);
+      result.put(tag, tagWords);
     }
     return result; 
   }
