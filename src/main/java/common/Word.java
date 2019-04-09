@@ -7,20 +7,20 @@ package common;
  */
 public class Word {
 	
-  String wordStr=null;
-  String wordTag = null;
+    String wordStr=null;
+    String wordTag = null;
 	
-  public Word(String term,String posTag ){
-	wordStr = term;
-	wordTag = posTag;
-  }
+    public Word(String term,String posTag ) {
+	    wordStr = term;
+	    wordTag = posTag;
+    }
 	
-  public String getWordName (){
-	return this.wordStr;
-  }
+    public String getWordName () {
+	    return this.wordStr;
+    }
 	
-  public String getWordTag (){
-	return this.wordTag;
-  }
+    public String getWordTag () {
+	    return this.wordTag;
+    }
 	
 }
