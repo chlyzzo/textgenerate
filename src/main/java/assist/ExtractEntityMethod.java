@@ -80,11 +80,11 @@ public class ExtractEntityMethod {
                     //前缀为空,看全部
                     String all = getSignificancePOSAll(one.nature);
                     if (!all.equals("default")) {
-                         result.append("[" + all + "]=");
-                     } else {
+                        result.append("[" + all + "]=");
+                    } else {
                          //前缀没有,全部也没有,则加词
-                         result.append(one.word + "=");
-                     }
+                        result.append(one.word + "=");
+                    }
                 }//end extract
             }//end sentence
         }//sentence is not null
@@ -126,7 +126,7 @@ public class ExtractEntityMethod {
         String prefPOS = "default";
         for (String pos: SignificancePOSPrefix) {
             if (na.startsWith(pos)) {
-	            prefPOS = pos;
+                prefPOS = pos;
                 break;
             }
         }
@@ -234,14 +234,14 @@ public class ExtractEntityMethod {
                         Term one = termList.get(i);
                         //前缀实意词
                         String pref = getSignificancePOSPrefix(one.nature);
-        	            if (!pref.equals("default")) {
-        	                result = processPosWordCount(result,pref,one.word);
-        	            } else { //前缀为空,看全部       	            
-        	                String all = getSignificancePOSAll(one.nature);
-        	                if (!all.equals("default")) {
-        	                    result = processPosWordCount(result, all, one.word);
-        	                }
-        	            }//end extract
+                        if (!pref.equals("default")) {
+                            result = processPosWordCount(result,pref,one.word);
+                        } else { //前缀为空,看全部       	            
+                            String all = getSignificancePOSAll(one.nature);
+                            if (!all.equals("default")) {
+                                result = processPosWordCount(result, all, one.word);
+                            }
+                        }//end extract
                     }//end sentence
                 }//sentence is not null
             }//排序
@@ -297,20 +297,20 @@ public class ExtractEntityMethod {
     public static List<String> findAllDefineTagsIndex(List<Term> segs) {
         //0, 先把标点符号去掉
         //1,先去除标点符号
-	    List<Term> newSegs = new LinkedList<>();
-	    for(Term term:segs){
-	        if (!term.nature.startsWith("w")) {
-		        newSegs.add(term);
-	        }
-	    }
+        List<Term> newSegs = new LinkedList<>();
+        for(Term term:segs) {
+            if (!term.nature.startsWith("w")) {
+                newSegs.add(term);
+            }
+        }
         //获取tag的连接关系
-	    Map<Character,List<Character>> firstToTwo = setFirtToTwoTagsMap();
-	    Map<Character,List<Character>> twoToThree = setTwoToThreeTagsMap();
-	    List<String> twos = Arrays.asList("nm,mv,mn,vm,mq".split(","));
-	    List<String> result = new ArrayList<>();
-	    int len = newSegs.size();
-	    int i = 0;
-	    while (i < len) {
+        Map<Character,List<Character>> firstToTwo = setFirtToTwoTagsMap();
+        Map<Character,List<Character>> twoToThree = setTwoToThreeTagsMap();
+        List<String> twos = Arrays.asList("nm,mv,mn,vm,mq".split(","));
+        List<String> result = new ArrayList<>();
+        int len = newSegs.size();
+        int i = 0;
+        while (i < len) {
 	        char one = newSegs.get(i).nature.firstChar();
 	        if (one == 'n') {// 在其下4个词内是否含n,
 	            //搜索,搜索两次,即8个名词,一般不会超过这么多了,
@@ -388,13 +388,13 @@ public class ExtractEntityMethod {
      */
     public static int againHasN(List<Term> segs, int i){
         int len = segs.size();
-	    int end = (i + 4) > len ? len: i + 4;
-	    int result = -1;
-	    for (int j = i + 1; j < end; j ++) {
-	        if (segs.get(j).nature.firstChar() == 'n') {
-	            result = j;
-	        }
-	    }
+        int end = (i + 4) > len ? len: i + 4;
+        int result = -1;
+        for (int j = i + 1; j < end; j ++) {
+            if (segs.get(j).nature.firstChar() == 'n') {
+                result = j;
+            }
+        }
         return result;
     }
 	
@@ -407,15 +407,15 @@ public class ExtractEntityMethod {
      */
     public static int nAfterFirstM(List<Term> segs, int n) {
         int len = segs.size();
-	    int end = (n + 4) > len ? len: n + 4;
-	    int result = -1;
-	    for (int j = n + 1; j < end; j++) {
-	        if (segs.get(j).nature.firstChar() == 'm') {
-	             result = j;
-		         break;
-	        }
-	    }
-	    return result;
+        int end = (n + 4) > len ? len: n + 4;
+        int result = -1;
+        for (int j = n + 1; j < end; j++) {
+            if (segs.get(j).nature.firstChar() == 'm') {
+                result = j;
+                break;
+            }
+        }
+        return result;
     }
 	
     /**
@@ -423,11 +423,11 @@ public class ExtractEntityMethod {
      * @return
      */
     public static Map<Character, List<Character>> setTwoToThreeTagsMap() {
-	    Map<Character, List<Character>> TwoToThree = new HashMap<>();
-	    TwoToThree.put('n', Arrays.asList('n'));
-	    TwoToThree.put('q', Arrays.asList('n'));
-	    TwoToThree.put('m', Arrays.asList('q', 'v'));
-	    TwoToThree.put('v', Arrays.asList('n', 'm'));
-	    return TwoToThree;
+        Map<Character, List<Character>> TwoToThree = new HashMap<>();
+        TwoToThree.put('n', Arrays.asList('n'));
+        TwoToThree.put('q', Arrays.asList('n'));
+        TwoToThree.put('m', Arrays.asList('q', 'v'));
+        TwoToThree.put('v', Arrays.asList('n', 'm'));
+        return TwoToThree;
     }
 }
