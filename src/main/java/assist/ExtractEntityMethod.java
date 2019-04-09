@@ -86,8 +86,8 @@ public class ExtractEntityMethod {
                          result.append(one.word + "=");
                      }
                 }//end extract
-	        }//end sentence
-	    }//sentence is not null
+            }//end sentence
+        }//sentence is not null
         return result.substring(0, result.length() - 1);
     }
 
@@ -100,7 +100,7 @@ public class ExtractEntityMethod {
      */
     public static Map<String, Map<String,Integer>> processPosWordCount(Map<String, Map<String, Integer>> result, String pos, String word) {
         //词性是否存在
-	    if (result.keySet().contains(pos)) {
+        if (result.keySet().contains(pos)) {
 	        Map<String, Integer> ones = result.get(pos);
 	        //词是否存在
 	        if (ones.keySet().contains(word)) {
