@@ -101,9 +101,9 @@ public class ExtractEntityMethod {
     public static Map<String, Map<String,Integer>> processPosWordCount(Map<String, Map<String, Integer>> result, String pos, String word) {
         //词性是否存在
         if (result.keySet().contains(pos)) {
-	        Map<String, Integer> ones = result.get(pos);
-	        //词是否存在
-	        if (ones.keySet().contains(word)) {
+            Map<String, Integer> ones = result.get(pos);
+            //词是否存在
+            if (ones.keySet().contains(word)) {
 	            ones.put(word, ones.get(word) + 1);
 	        } else {
                 ones.put(word, 1);
