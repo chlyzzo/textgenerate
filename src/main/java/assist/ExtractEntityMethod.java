@@ -77,15 +77,15 @@ public class ExtractEntityMethod {
                 if (!pref.equals("default")) {
                     result.append("[" + pref + "]=");
                 } else {
-		            //前缀为空,看全部
-		            String all = getSignificancePOSAll(one.nature);
-		            if (!all.equals("default")) {
-		                result.append("[" + all + "]=");
-		            } else {
-		                //前缀没有,全部也没有,则加词
-		                result.append(one.word + "=");
-		            }
-	            }//end extract
+                    //前缀为空,看全部
+                    String all = getSignificancePOSAll(one.nature);
+                    if (!all.equals("default")) {
+                         result.append("[" + all + "]=");
+                     } else {
+                         //前缀没有,全部也没有,则加词
+                         result.append(one.word + "=");
+                     }
+                }//end extract
 	        }//end sentence
 	    }//sentence is not null
         return result.substring(0, result.length() - 1);
@@ -106,15 +106,15 @@ public class ExtractEntityMethod {
 	        if (ones.keySet().contains(word)) {
 	            ones.put(word, ones.get(word) + 1);
 	        } else {
-		        ones.put(word, 1);
+                ones.put(word, 1);
 	        }
 	        result.put(pos, ones);
 	    } else {
             Map<String,Integer> one = new HashMap<String, Integer>();
-	        one.put(word, 1);
-	        result.put(pos, one);
-	    }
-	    return result;
+            one.put(word, 1);
+            result.put(pos, one);
+        }
+        return result;
     }
 
     /**
@@ -124,10 +124,10 @@ public class ExtractEntityMethod {
      */
     public static String getSignificancePOSPrefix(Nature na) {
         String prefPOS = "default";
-	    for (String pos: SignificancePOSPrefix) {
+        for (String pos: SignificancePOSPrefix) {
 	        if (na.startsWith(pos)) {
 	            prefPOS = pos;
-		        break;
+                break;
 	        }
 	    }
         return prefPOS;
@@ -140,10 +140,10 @@ public class ExtractEntityMethod {
      */
     public static String getSignificancePOSAll(Nature na) {
         String prefPOS = "default";
-	    for (String pos: SignificancePOSAll) {
-	        if (na.name().equals(pos)){
-	            prefPOS = pos;
-		        break;
+        for (String pos: SignificancePOSAll) {
+            if (na.name().equals(pos)){
+                prefPOS = pos;
+                break;
 	        }
 	    }
         return prefPOS;
@@ -155,8 +155,8 @@ public class ExtractEntityMethod {
      * @return
      */
     public static List <String> extractSignificanceAndSaveOthersFromDocument(String document){
-	    List <String> result = new ArrayList<>();
-	    if (document != null) {
+        List <String> result = new ArrayList<>();
+        if (document != null) {
 	        //1,先进行句子切分,注意不是细粒度,不是碰到标点符号就去切;粗粒度的切分.
 	        List<String> sentences = DataProcess.spiltSentence(document);
 	        //2,再根据切分的句子进行实体抽取.
@@ -175,7 +175,7 @@ public class ExtractEntityMethod {
      * 每篇文档是一行，语料太多只取部分句子作为训练
      */
     public static void getRuleTrainData(String filename, String newfile){
-	    InputStreamReader inputReader = null;
+        InputStreamReader inputReader = null;
         BufferedReader bufferReader = null;
         try {
             InputStream inputStream = new FileInputStream(filename);
@@ -200,8 +200,8 @@ public class ExtractEntityMethod {
      * @return
      */
     public static String getTopKSentence(List<String> list, int k){
-	    StringBuffer result = new StringBuffer();
-	    if (list != null && list.size() >= 1) {
+        StringBuffer result = new StringBuffer();
+        if (list != null && list.size() >= 1) {
 	        List<String> res = list.subList(0, Math.min(list.size(), k));
 	        int len = res.size();
 	        for (int i = 0; i < len; i++) {
