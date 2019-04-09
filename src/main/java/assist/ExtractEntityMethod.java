@@ -104,7 +104,7 @@ public class ExtractEntityMethod {
             Map<String, Integer> ones = result.get(pos);
             //词是否存在
             if (ones.keySet().contains(word)) {
-	            ones.put(word, ones.get(word) + 1);
+                ones.put(word, ones.get(word) + 1);
 	        } else {
                 ones.put(word, 1);
 	        }
@@ -125,11 +125,11 @@ public class ExtractEntityMethod {
     public static String getSignificancePOSPrefix(Nature na) {
         String prefPOS = "default";
         for (String pos: SignificancePOSPrefix) {
-	        if (na.startsWith(pos)) {
+            if (na.startsWith(pos)) {
 	            prefPOS = pos;
                 break;
-	        }
-	    }
+            }
+        }
         return prefPOS;
     }
 
@@ -144,8 +144,8 @@ public class ExtractEntityMethod {
             if (na.name().equals(pos)){
                 prefPOS = pos;
                 break;
-	        }
-	    }
+            }
+        }
         return prefPOS;
     }
 	
@@ -157,15 +157,15 @@ public class ExtractEntityMethod {
     public static List <String> extractSignificanceAndSaveOthersFromDocument(String document){
         List <String> result = new ArrayList<>();
         if (document != null) {
-	        //1,先进行句子切分,注意不是细粒度,不是碰到标点符号就去切;粗粒度的切分.
-	        List<String> sentences = DataProcess.spiltSentence(document);
-	        //2,再根据切分的句子进行实体抽取.
-	        for (String line: sentences) {
-	            result.add(extractSignificanceAndSaveOthersFromSentence(line));
-	        }
-	        //3,返回结果.
-	    }
-	    return result;
+            //1,先进行句子切分,注意不是细粒度,不是碰到标点符号就去切;粗粒度的切分.
+            List<String> sentences = DataProcess.spiltSentence(document);
+            //2,再根据切分的句子进行实体抽取.
+            for (String line: sentences) {
+                result.add(extractSignificanceAndSaveOthersFromSentence(line));
+            }
+            //3,返回结果.
+        }
+        return result;
     }
 
     /**
@@ -202,13 +202,13 @@ public class ExtractEntityMethod {
     public static String getTopKSentence(List<String> list, int k){
         StringBuffer result = new StringBuffer();
         if (list != null && list.size() >= 1) {
-	        List<String> res = list.subList(0, Math.min(list.size(), k));
-	        int len = res.size();
-	        for (int i = 0; i < len; i++) {
-		        result.append(res.get(i) + "=,=");
-	        }
+            List<String> res = list.subList(0, Math.min(list.size(), k));
+            int len = res.size();
+            for (int i = 0; i < len; i++) {
+                result.append(res.get(i) + "=,=");
+            }
         }
-	    return result.substring(0, result.length() - 1);
+        return result.substring(0, result.length() - 1);
     }
 
     /**
@@ -231,9 +231,9 @@ public class ExtractEntityMethod {
                 if (termList != null) {
                     int len = termList.size();
                     for (int i=0; i < len; i++) {
-        	            Term one = termList.get(i);
-        	            //前缀实意词
-        	            String pref = getSignificancePOSPrefix(one.nature);
+                        Term one = termList.get(i);
+                        //前缀实意词
+                        String pref = getSignificancePOSPrefix(one.nature);
         	            if (!pref.equals("default")) {
         	                result = processPosWordCount(result,pref,one.word);
         	            } else { //前缀为空,看全部       	            
