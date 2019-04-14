@@ -33,15 +33,15 @@ public class GenarateTextMethod {
      * @return
      */
     public static String generateSentenceFromOutputWords(List<String> output) {
-	    if (output != null) {
-	        int len = output.size();
-	        String result = "";
-	        for(int i = 0; i < len; i++) {
-		        result += output.get(i);
-	        }
-	        return result;
+	if (output != null) {
+	    int len = output.size();
+	    String result = "";
+	    for(int i = 0; i < len; i++) {
+		result += output.get(i);
 	    }
-	    return null;
+	    return result;
+	}
+	return null;
     }
 	
     /**
@@ -52,10 +52,10 @@ public class GenarateTextMethod {
      */
     public static Set<String> getWordFromLdaVocaByIds(Set<Integer> ids, Vocabulary vocabulary) {
         Set<String> result = new HashSet<>();
-	    for (Integer id: ids) {
-	        result.add(vocabulary.getWord(id));
-	    }
-	    return result;
+	for (Integer id: ids) {
+	    result.add(vocabulary.getWord(id));
+	}
+	return result;
     }
   
     /**
@@ -65,11 +65,11 @@ public class GenarateTextMethod {
      * @return
      */
     public static Set<String> getWordFromLdaVocaByIds(int[] ids, Vocabulary vocabulary) {
-	    Set<String> result = new HashSet<>();
-	    for (Integer id: ids) {
-	        result.add(vocabulary.getWord(id));
-	    }
-	    return result;
+	Set<String> result = new HashSet<>();
+	for (Integer id: ids) {
+	    result.add(vocabulary.getWord(id));
+	}
+	return result;
     }
   
     /**
@@ -78,14 +78,14 @@ public class GenarateTextMethod {
      * @return
      */
     public static String selectWordInNextWordsRandom(List<Word> nextWords) {
-	    String nextWord = "";
-	    if (nextWords != null) {
+	String nextWord = "";
+	if (nextWords != null) {
             int len = nextWords.size();
-	        Random ne =new Random();
-	        Integer randomWordIndex = ne.nextInt(len) % (len + 1);
+	    Random ne =new Random();
+	    Integer randomWordIndex = ne.nextInt(len) % (len + 1);
             nextWord = nextWords.get(randomWordIndex).getWordName();
-	    }
-	    return nextWord;
+	}
+	return nextWord;
     }
 
     /**
@@ -94,14 +94,14 @@ public class GenarateTextMethod {
      * @return
      */
     public static String selectWordInNextWordsRandomString(List<String> nextWords) {
-	    String nextWord = "";
-	    if (nextWords != null) {
-	        int len = nextWords.size();
-	        Random ne =new Random();
-	        Integer randomWordIndex = ne.nextInt(len) % (len + 1);
+	String nextWord = "";
+	if (nextWords != null) {
+	    int len = nextWords.size();
+	    Random ne =new Random();
+	    Integer randomWordIndex = ne.nextInt(len) % (len + 1);
             nextWord = nextWords.get(randomWordIndex);
-	    }
-	    return nextWord;
+	}
+	return nextWord;
     }
 	
     /**
@@ -111,23 +111,23 @@ public class GenarateTextMethod {
      * @return
      */
     public static String selectWordInNextWordsRandom(List<Word> nextWords, String tag) {
-	    Word nextWord = null;
-	    if (nextWords != null) {
-	        int len = nextWords.size();
-	        int randomMax = len;
-	        String selectTag = null;
-	        while (!tag.equals(selectTag) && len > 0) {
-		        Random ne =new Random();
-		        Integer randomWordIndex = ne.nextInt(randomMax) % (randomMax + 1);
-		        nextWord = nextWords.get(randomWordIndex);
-		        selectTag = nextWord.getWordTag();
-		        len--;
-	        }
+	Word nextWord = null;
+	if (nextWords != null) {
+	    int len = nextWords.size();
+	    int randomMax = len;
+	    String selectTag = null;
+	    while (!tag.equals(selectTag) && len > 0) {
+                Random ne =new Random();
+		Integer randomWordIndex = ne.nextInt(randomMax) % (randomMax + 1);
+		nextWord = nextWords.get(randomWordIndex);
+		selectTag = nextWord.getWordTag();
+		len--;
 	    }
-	    if (nextWord != null) {
-	        return nextWord.getWordName();
-	    }
-	    return null;
+	}
+	if (nextWord != null) {
+	    return nextWord.getWordName();
+	}
+	return null;
     }
 	
     /**
@@ -136,11 +136,11 @@ public class GenarateTextMethod {
      * @return
      */
     public static String selectWordInNextWordsMax(List<Word> nextWords) {
-	    String nextWord = "";
-	    if (nextWords != null) {
-	        nextWord = nextWords.get(0).getWordName();
-	    }
-	    return nextWord;
+	String nextWord = "";
+	if (nextWords != null) {
+	    nextWord = nextWords.get(0).getWordName();
+	}
+	return nextWord;
     }
 	
     /**
@@ -150,17 +150,17 @@ public class GenarateTextMethod {
      * @return
      */
     public static String selectWordInNextWordsMax(List<Word> nextWords, String tag) {
-	    String nextWord = null;
-	    if (nextWords != null) {
-	        int len = nextWords.size();
-	        for(int i = 0; i < len; i ++) {
-		        if (tag.equals(nextWords.get(i).getWordTag())) {
-		            nextWord = nextWords.get(i).getWordName();
-		            break;
-		        }
-	        }
+	String nextWord = null;
+	if (nextWords != null) {
+	    int len = nextWords.size();
+	    for(int i = 0; i < len; i ++) {
+                if (tag.equals(nextWords.get(i).getWordTag())) {
+		    nextWord = nextWords.get(i).getWordName();
+		    break;
+                }
 	    }
-	    return nextWord;
+	}
+	return nextWord;
     }
 
     /**
@@ -172,21 +172,21 @@ public class GenarateTextMethod {
      * @throws IOException
      */
     public static Map<Word, Integer> getFirstSentenceCandidates(int maxTopic, List<String> inputDoc, GenerateModel generateModel) throws IOException {
-	    System.out.println("get fisrt words");
-	    int[] maxTopicWordsId = LdaUtil.getMaxTopicWordDistribute(maxTopic, generateModel.getPhi(), MAX_TOPIC_WORDS);
-	    Set<String> basedWords = getWordFromLdaVocaByIds(maxTopicWordsId,generateModel.getVocabulary());
-	    basedWords.addAll(inputDoc);
-	    System.out.println(basedWords.size());
-	    //获得第一个词id和频率
-	    Map<Word, Integer> wordGenerate = new HashMap<>();
-	    for (String word: basedWords) {
-	        if (TopicWordProcess.getWordFirstWord(generateModel.getCorpus(), word) != null) {
-	   	        wordGenerate.putAll(TopicWordProcess.getWordFirstWord(generateModel.getCorpus(), word));
-	        }
+	System.out.println("get fisrt words");
+	int[] maxTopicWordsId = LdaUtil.getMaxTopicWordDistribute(maxTopic, generateModel.getPhi(), MAX_TOPIC_WORDS);
+	Set<String> basedWords = getWordFromLdaVocaByIds(maxTopicWordsId,generateModel.getVocabulary());
+	basedWords.addAll(inputDoc);
+	System.out.println(basedWords.size());
+	//获得第一个词id和频率
+	Map<Word, Integer> wordGenerate = new HashMap<>();
+	for (String word: basedWords) {
+	    if (TopicWordProcess.getWordFirstWord(generateModel.getCorpus(), word) != null) {
+	   	wordGenerate.putAll(TopicWordProcess.getWordFirstWord(generateModel.getCorpus(), word));
 	    }
-	    basedWords.clear();
- 	    System.out.println("first words has " + wordGenerate.keySet().size() + "!!!");
-	    return wordGenerate;
+	}
+	basedWords.clear();
+ 	System.out.println("first words has " + wordGenerate.keySet().size() + "!!!");
+	return wordGenerate;
     }
 	
     /**
@@ -199,13 +199,13 @@ public class GenarateTextMethod {
      */
     public static boolean generateSentJudgeByTopic(List<String> input, GenerateModel generateModel, int topicIndex) throws IOException{
 		
-	    int[] document = Corpus.loadString(input, generateModel.vocabulary);
-	    int topic = LdaUtil.getMaxTopicIndex(document, generateModel.topicWord);
-	    if (topic == topicIndex) {
-	        return true;
-	    } else {
-	        return false;
-	    }
+	int[] document = Corpus.loadString(input, generateModel.vocabulary);
+	int topic = LdaUtil.getMaxTopicIndex(document, generateModel.topicWord);
+	if (topic == topicIndex) {
+	    return true;
+	} else {
+	    return false;
+	}
     }
 	
 }
