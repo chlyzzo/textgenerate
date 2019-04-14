@@ -24,7 +24,7 @@ public class MapSoredClass<T> {
     public Map<T, Integer> map = new HashMap<T, Integer>();
 	 
     public void addObject(T key, Integer oj) {
-	    map.put(key, oj);
+	map.put(key, oj);
     }
 
     /**
@@ -33,23 +33,23 @@ public class MapSoredClass<T> {
      * @return
      */
     public Map<T,Integer> getSortedDesc(boolean flag) {		 
-	    if (map == null || map.isEmpty()) {
-	        return null;
+	if (map == null || map.isEmpty()) {
+	   return null;
         }
-	    Map<T,Integer> sortedMap = new LinkedHashMap<>();
-	    List<Map.Entry<T, Integer>> entryList = new ArrayList<Map.Entry<T, Integer>>(map.entrySet());
-	    if (flag) {
-	        Collections.sort(entryList, new MapValueDescComparator());
-	    } else {
-	        Collections.sort(entryList, new MapValueAscComparator());
-	    }
-	    Iterator<Map.Entry<T, Integer>> iter = entryList.iterator();
-	    Map.Entry<T, Integer> tmpEntry = null;
-	    while (iter.hasNext()) {
-	        tmpEntry = iter.next();
-	        sortedMap.put(tmpEntry.getKey(), tmpEntry.getValue());
-	    }
-	    return sortedMap;
+	Map<T,Integer> sortedMap = new LinkedHashMap<>();
+	List<Map.Entry<T, Integer>> entryList = new ArrayList<Map.Entry<T, Integer>>(map.entrySet());
+        if (flag) {
+	    Collections.sort(entryList, new MapValueDescComparator());
+	} else {
+	    Collections.sort(entryList, new MapValueAscComparator());
+	}
+	Iterator<Map.Entry<T, Integer>> iter = entryList.iterator();
+	Map.Entry<T, Integer> tmpEntry = null;
+	while (iter.hasNext()) {
+	    tmpEntry = iter.next();
+	    sortedMap.put(tmpEntry.getKey(), tmpEntry.getValue());
+	}
+	return sortedMap;
     }
 
     /**
@@ -60,22 +60,22 @@ public class MapSoredClass<T> {
      */
     public List<T> sortDescByValueReturnKeys(boolean flag) {	
         if (map == null || map.isEmpty()) {
-	        return null;
-	    }
-	    List<T> sortedMap = new LinkedList<>();
-	    List<Map.Entry<T, Integer>> entryList = new ArrayList<Map.Entry<T, Integer>>(map.entrySet());
-	    if (flag) {
-	        Collections.sort(entryList, new MapValueDescComparator());
-	    } else {
-	        Collections.sort(entryList, new MapValueAscComparator());
-	    }
-	    Iterator<Map.Entry<T, Integer>> iter = entryList.iterator();
-	    Map.Entry<T, Integer> tmpEntry = null;
-	    while (iter.hasNext()) {
-	        tmpEntry = iter.next();
-	        sortedMap.add(tmpEntry.getKey());
-	    }
-	    return sortedMap;
+	    return null;
+	}
+	List<T> sortedMap = new LinkedList<>();
+	List<Map.Entry<T, Integer>> entryList = new ArrayList<Map.Entry<T, Integer>>(map.entrySet());
+	if (flag) {
+	    Collections.sort(entryList, new MapValueDescComparator());
+	} else {
+	    Collections.sort(entryList, new MapValueAscComparator());
+        }
+	Iterator<Map.Entry<T, Integer>> iter = entryList.iterator();
+	Map.Entry<T, Integer> tmpEntry = null;
+	while (iter.hasNext()) {
+	    tmpEntry = iter.next();
+	    sortedMap.add(tmpEntry.getKey());
+	}
+	return sortedMap;
     }
 
     /***比较器类;降序***/
