@@ -27,11 +27,11 @@ public class DataProcess {
      * @return
      */
     public static GenerateModel getGenerateModel(String file) {
-	    Vocabulary vocabulary = LdaUtil.getModelVocabulary();
-	    double[][] phi = LdaUtil.getTopicWordDistribute();
-	    List<List<Word>> corpos = DataProcess.readOnlySegCorpus(file);
-	    GenerateModel generate = new GenerateModel(phi, vocabulary, corpos);
-	    return generate;
+	Vocabulary vocabulary = LdaUtil.getModelVocabulary();
+	double[][] phi = LdaUtil.getTopicWordDistribute();
+	List<List<Word>> corpos = DataProcess.readOnlySegCorpus(file);
+	GenerateModel generate = new GenerateModel(phi, vocabulary, corpos);
+	return generate;
     }
 	
     /**
@@ -41,7 +41,7 @@ public class DataProcess {
      * 按照标点符号切分,细粒度,
      */
     public static List<String> getSentences(String doc) {
-	    return SentencesUtil.toSentenceList(doc);
+	return SentencesUtil.toSentenceList(doc);
     }
   
     /**
@@ -72,8 +72,8 @@ public class DataProcess {
      * docid=word->tag[]word->tag[]..[]word->tag
      */
     public static List<List<Word>> readOnlySegCorpus(String file) {
-	    List<List<Word>> result = new ArrayList<>();
-	    InputStreamReader inputReader = null;
+	List<List<Word>> result = new ArrayList<>();
+	InputStreamReader inputReader = null;
         BufferedReader bufferReader = null;
         try {
             InputStream inputStream = new FileInputStream(file);
@@ -110,7 +110,7 @@ public class DataProcess {
      */
     public static List<List<String>> readTrainTag(String file) {
         List<List<String>> result = new ArrayList<>();
-	    InputStreamReader inputReader = null;
+	InputStreamReader inputReader = null;
         BufferedReader bufferReader = null;
         try {
             InputStream inputStream = new FileInputStream(file);
@@ -133,15 +133,15 @@ public class DataProcess {
      * @return
      */
     public static List<String> selectOneTagSortByRandom(List<List<String>> data) {
-	    List<String> oneSort = new ArrayList<>();
-	    if (data != null) {
-	        int len = data.size();
-	        Random ne =new Random();
-	        Integer randomndex = ne.nextInt(len) % (len + 1);
-	        oneSort = data.get(randomndex);
-	        data.clear();
-	    }
-	    return oneSort;
+	List<String> oneSort = new ArrayList<>();
+	if (data != null) {
+	    int len = data.size();
+	    Random ne =new Random();
+	    Integer randomndex = ne.nextInt(len) % (len + 1);
+	    oneSort = data.get(randomndex);
+	    data.clear();
+	}
+	return oneSort;
     }
 	
     /**
@@ -151,7 +151,7 @@ public class DataProcess {
      * @throws IOException
      */
     public static void writeLineToFile (String line, String filepath) throws IOException {
-	    File writename = new File(filepath); // 相对路径，如果没有则要建立一个新的output。txt文件  
+        File writename = new File(filepath); // 相对路径，如果没有则要建立一个新的output。txt文件  
         writename.createNewFile(); // 创建新文件  
         BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filepath, true)));  
         out.write(line + "\r\n"); // \r\n即为换行  
