@@ -11,16 +11,16 @@ public class Word {
     String wordTag = null;
 	
     public Word(String term,String posTag ) {
-	    wordStr = term;
-	    wordTag = posTag;
+	wordStr = term;
+	wordTag = posTag;
     }
 	
     public String getWordName () {
-	    return this.wordStr;
+	return this.wordStr;
     }
 	
     public String getWordTag () {
-	    return this.wordTag;
+	return this.wordTag;
     }
 	
 }
