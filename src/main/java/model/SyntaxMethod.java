@@ -16,12 +16,12 @@ public class SyntaxMethod {
 
     public static void main(String[] args) {
 		
-	    Map<String,Integer> map = new HashMap<>();
-	    map.put("a", 1);map.put("b", 16);map.put("c", 15);map.put("d", 10);
-	    MapSoredClass<String> mapsored = new MapSoredClass<String>();
-	    mapsored.map = map;
-	    map = mapsored.getSortedDesc(true);
-	    System.out.println(map);  
+	Map<String,Integer> map = new HashMap<>();
+	map.put("a", 1);map.put("b", 16);map.put("c", 15);map.put("d", 10);
+	MapSoredClass<String> mapsored = new MapSoredClass<String>();
+	mapsored.map = map;
+	map = mapsored.getSortedDesc(true);
+	System.out.println(map);  
     }
 	
     /**
