@@ -20,8 +20,8 @@ import common.MapSoredClass;
 public class TopicWordProcess {
 
     public static void main(String[] args) {
-	    List<List<Word>> corpus = DataProcess.readOnlySegCorpus("/home/min/workspace/data/ajk_zixun/generate_text/part-00000");
-	    TopicWordProcess.getWordNextWord(corpus, "另一方面").keySet().forEach(r -> {
+        List<List<Word>> corpus = DataProcess.readOnlySegCorpus("/home/min/workspace/data/ajk_zixun/generate_text/part-00000");
+	TopicWordProcess.getWordNextWord(corpus, "另一方面").keySet().forEach(r -> {
             System.out.println(((Word) r).getWordName());
         });
     }
@@ -31,7 +31,7 @@ public class TopicWordProcess {
      * @return
      */
     public static double[][] getTopicWordDistribute() {
-	    return LdaUtil.getTopicWordDistribute();
+	return LdaUtil.getTopicWordDistribute();
     }
 	
     /**
@@ -40,12 +40,12 @@ public class TopicWordProcess {
      * @return
      */
     public static double[][] getWordTopicDistribute(double[][] topicword) {
-	    double [][] wordtopic = new double[topicword[0].length][topicword.length];
-	    long allWord = topicword[0].length;
-	    for (int i = 0; i < allWord; i++) {
-	        wordtopic[i] = getTwoArraycolumn(topicword, i);
-	    }
-	    return wordtopic;
+	double [][] wordtopic = new double[topicword[0].length][topicword.length];
+	long allWord = topicword[0].length;
+	for (int i = 0; i < allWord; i++) {
+	    wordtopic[i] = getTwoArraycolumn(topicword, i);
+	}
+	return wordtopic;
     }
   
     /**
@@ -54,13 +54,13 @@ public class TopicWordProcess {
      * @return
      */
     public static double[][] getWordTopicDistribute() {
-	    double[][] topicword = getTopicWordDistribute();
-	    double [][] wordtopic = new double[topicword[0].length][topicword.length];
-	    long allWord = topicword[0].length;
-	    for (int i = 0; i < allWord; i++) {
-	        wordtopic[i] = getTwoArraycolumn(topicword, i);
-	    }
-	    return wordtopic;
+	double[][] topicword = getTopicWordDistribute();
+	double [][] wordtopic = new double[topicword[0].length][topicword.length];
+	long allWord = topicword[0].length;
+	for (int i = 0; i < allWord; i++) {
+	    wordtopic[i] = getTwoArraycolumn(topicword, i);
+	}
+	return wordtopic;
     }
     
     /**
@@ -95,29 +95,29 @@ public class TopicWordProcess {
      * 词id与词的对应关系在词典中获得
      */
     public static Map<Word, Integer> getWordNextWord(List<List<Word>> corpus, String word){
-	    Map<Word, Integer> result = new HashMap<>();
-	    int totalDocs = corpus.size();
-	    //每篇文档中词查找next
-	    for (int doc = 0; doc < totalDocs; doc++) {
-	        List<Word> docWords = corpus.get(doc);
-	        int docWordCount = docWords.size();
-	        //每个词遍历
-	        for (int i = 0; i < docWordCount; i++) {
-	            if(docWords.get(i).getWordName().equals(word) && i + 1 < docWordCount) { //找到,则下一个字id保存,
-		            if (result.keySet().contains(docWords.get(i + 1))) {
-		                result.put(docWords.get(i + 1), result.get(docWords.get(i + 1)) + 1);
-		            } else {
-		                result.put(docWords.get(i + 1), 1);
-		            }
-		            i = i + 2;
-		        }
-	        }//end one document,
-	    }
-	    //对结果按照value排序
-	    MapSoredClass<Word> mapsored = new MapSoredClass<Word>();
-	    mapsored.map = result;
-	    result = mapsored.getSortedDesc(true);
-	    return result;
+	Map<Word, Integer> result = new HashMap<>();
+	int totalDocs = corpus.size();
+	//每篇文档中词查找next
+	for (int doc = 0; doc < totalDocs; doc++) {
+	    List<Word> docWords = corpus.get(doc);
+	    int docWordCount = docWords.size();
+	    //每个词遍历
+	    for (int i = 0; i < docWordCount; i++) {
+	        if(docWords.get(i).getWordName().equals(word) && i + 1 < docWordCount) { //找到,则下一个字id保存,
+		    if (result.keySet().contains(docWords.get(i + 1))) {
+		        result.put(docWords.get(i + 1), result.get(docWords.get(i + 1)) + 1);
+		    } else {
+		        result.put(docWords.get(i + 1), 1);
+		    }
+		    i = i + 2;
+		}
+	    }//end one document,
+	}
+	//对结果按照value排序
+	MapSoredClass<Word> mapsored = new MapSoredClass<Word>();
+	mapsored.map = result;
+	result = mapsored.getSortedDesc(true);
+	return result;
     }
 
     /**
@@ -127,26 +127,26 @@ public class TopicWordProcess {
      * @return
      */
     public static Map<Word, Integer> getWordFirstWord(List<List<Word>> corpus, String word){	
-	    Map<Word, Integer> result = new HashMap<>();
-	    int totalDocs = corpus.size();
-	    //每篇文档中词查找开头第一词
-	    for (int doc = 0; doc < totalDocs; doc++) {
-	        List<String> docWords = new ArrayList<>();
-	        corpus.get(doc).forEach(r -> { docWords.add(r.getWordName());});
-	        Word first = corpus.get(doc).get(0);
-	        if(docWords.contains(word)) { 
-		        if (result.keySet().contains(first)) {
-		            result.put(first, result.get(first) + 1);
-		        } else {
-		            result.put(first, 1);
-		        }
-	        }
-	    }//end one document,
-	    //对结果按照value排序
-	    MapSoredClass<Word> mapsored = new MapSoredClass<Word>();
-	    mapsored.map = result;
-	    result = mapsored.getSortedDesc(true);
-	    return result;
+	Map<Word, Integer> result = new HashMap<>();
+	int totalDocs = corpus.size();
+	//每篇文档中词查找开头第一词
+	for (int doc = 0; doc < totalDocs; doc++) {
+	    List<String> docWords = new ArrayList<>();
+	    corpus.get(doc).forEach(r -> { docWords.add(r.getWordName());});
+	    Word first = corpus.get(doc).get(0);
+	    if(docWords.contains(word)) { 
+		if (result.keySet().contains(first)) {
+		    result.put(first, result.get(first) + 1);
+		} else {
+		    result.put(first, 1);
+		}
+	    }
+	}//end one document,
+	//对结果按照value排序
+	MapSoredClass<Word> mapsored = new MapSoredClass<Word>();
+	mapsored.map = result;
+	result = mapsored.getSortedDesc(true);
+	return result;
     }
   
     /**
@@ -168,7 +168,7 @@ public class TopicWordProcess {
      * @return
      */
     public static Set<Integer> arrayToSet(int[] array) {
-	    Set<Integer> set = new HashSet<>();
+	Set<Integer> set = new HashSet<>();
         int len = array.length;
         for(int i = 0; i < len; i++) {
             set.add(array[i]);
@@ -200,7 +200,7 @@ public class TopicWordProcess {
      */
     public static List<Word> sortMapByValueReturnKeys(Map<Word, Integer> map) {
         MapSoredClass<Word> mapsored = new MapSoredClass<Word>();
-	    mapsored.map = map;
-	    return mapsored.sortDescByValueReturnKeys(true);
+	mapsored.map = map;
+        return mapsored.sortDescByValueReturnKeys(true);
     } 
 }
