@@ -328,13 +328,13 @@ public class ExtractEntityMethod {
                 } else {
                     i = i + 1;
                 }
-	        }
-	        if (i >= len) {
+	    }
+	    if (i >= len) {
                 break;
-	        }
-	        one = newSegs.get(i).nature.firstChar();
-	        if(firstToTwo.keySet().contains(one)) {
-	            //第一个tag在组块内
+	    }
+	    one = newSegs.get(i).nature.firstChar();
+	    if(firstToTwo.keySet().contains(one)) {
+	        //第一个tag在组块内
                 if (i + 1 < len && firstToTwo.get(one).contains(newSegs.get(i + 1).nature.firstChar())) {
 		    //第二个tag在组块内
 		    char two = newSegs.get(i + 1).nature.firstChar();
