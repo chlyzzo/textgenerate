@@ -311,9 +311,9 @@ public class ExtractEntityMethod {
         int len = newSegs.size();
         int i = 0;
         while (i < len) {
-	        char one = newSegs.get(i).nature.firstChar();
-	        if (one == 'n') {// 在其下4个词内是否含n,
-	            //搜索,搜索两次,即8个名词,一般不会超过这么多了,
+	    char one = newSegs.get(i).nature.firstChar();
+	    if (one == 'n') {// 在其下4个词内是否含n,
+	        //搜索,搜索两次,即8个名词,一般不会超过这么多了,
                 int newI1=againHasN(newSegs, i);
                 i = i > newI1 ? i : newI1;
                 newI1 = againHasN(newSegs, i);
@@ -336,34 +336,34 @@ public class ExtractEntityMethod {
 	        if(firstToTwo.keySet().contains(one)) {
 	            //第一个tag在组块内
                 if (i + 1 < len && firstToTwo.get(one).contains(newSegs.get(i + 1).nature.firstChar())) {
-		            //第二个tag在组块内
-		            char two = newSegs.get(i + 1).nature.firstChar();
-		            if (i + 2 < len && twoToThree.get(two).contains(newSegs.get(i + 2).nature.firstChar())) {
-		                //第三个tag在组块内
-		                String threeWord = newSegs.get(i + 2).word;
-			            String twoWord = newSegs.get(i + 1).word;
-			            String oneWord = newSegs.get(i).word;
-			            result.add(oneWord + "=" + twoWord + "=" + threeWord);
-			            i = i + 3;
-		            } else {
-		                //第三个tag不在组块内,则取两个的,连续连个的tag有固定几个
-		                if (twos.contains(String.valueOf(one) + String.valueOf(two))) {
-			                 String twoWord = newSegs.get(i + 1).word;
-			                 String oneWord = newSegs.get(i).word;
-			                 result.add(oneWord + "=" + twoWord);
-			                 i = i + 2;
-		                } else {
-		                     i = i + 1;
-		                }
-		            }
+		    //第二个tag在组块内
+		    char two = newSegs.get(i + 1).nature.firstChar();
+		    if (i + 2 < len && twoToThree.get(two).contains(newSegs.get(i + 2).nature.firstChar())) {
+		        //第三个tag在组块内
+		        String threeWord = newSegs.get(i + 2).word;
+			String twoWord = newSegs.get(i + 1).word;
+			String oneWord = newSegs.get(i).word;
+			result.add(oneWord + "=" + twoWord + "=" + threeWord);
+			i = i + 3;
+		    } else {
+		        //第三个tag不在组块内,则取两个的,连续连个的tag有固定几个
+		        if (twos.contains(String.valueOf(one) + String.valueOf(two))) {
+			    String twoWord = newSegs.get(i + 1).word;
+			    String oneWord = newSegs.get(i).word;
+			    result.add(oneWord + "=" + twoWord);
+			    i = i + 2;
 		        } else {
 		            i = i + 1;
 		        }
-	        } else { //第一个tag在不在
-	            i = i + 1;
-	        }
+		    }
+		} else {
+		    i = i + 1;
+		}
+	    } else { //第一个tag在不在
+	        i = i + 1;
 	    }
-	    return result;
+	}
+	return result;
     }
 
     /**
