@@ -314,28 +314,28 @@ public class ExtractEntityMethod {
 	        char one = newSegs.get(i).nature.firstChar();
 	        if (one == 'n') {// 在其下4个词内是否含n,
 	            //搜索,搜索两次,即8个名词,一般不会超过这么多了,
-		        int newI1=againHasN(newSegs, i);
-		        i = i > newI1 ? i : newI1;
-		        newI1 = againHasN(newSegs, i);
-		        i = i > newI1 ? i : newI1;
-		        //找到最近的m,然后把n移到m的前一个,
-		        int firstM = nAfterFirstM(newSegs, i);
-		        if (firstM > i) {
-		            //i和firstM-1进行交换,值也交换
-		            Term termI = newSegs.get(i);
-		            newSegs.set(firstM - 1, termI);
-		            i = firstM - 1;
-		        } else {
-		            i = i + 1;
-		        }
+                int newI1=againHasN(newSegs, i);
+                i = i > newI1 ? i : newI1;
+                newI1 = againHasN(newSegs, i);
+                i = i > newI1 ? i : newI1;
+                //找到最近的m,然后把n移到m的前一个,
+                int firstM = nAfterFirstM(newSegs, i);
+                if (firstM > i) {
+                    //i和firstM-1进行交换,值也交换
+                    Term termI = newSegs.get(i);
+                    newSegs.set(firstM - 1, termI);
+                    i = firstM - 1;
+                } else {
+                    i = i + 1;
+                }
 	        }
 	        if (i >= len) {
-		        break;
+                break;
 	        }
 	        one = newSegs.get(i).nature.firstChar();
 	        if(firstToTwo.keySet().contains(one)) {
 	            //第一个tag在组块内
-		        if (i + 1 < len && firstToTwo.get(one).contains(newSegs.get(i + 1).nature.firstChar())) {
+                if (i + 1 < len && firstToTwo.get(one).contains(newSegs.get(i + 1).nature.firstChar())) {
 		            //第二个tag在组块内
 		            char two = newSegs.get(i + 1).nature.firstChar();
 		            if (i + 2 < len && twoToThree.get(two).contains(newSegs.get(i + 2).nature.firstChar())) {
@@ -371,13 +371,13 @@ public class ExtractEntityMethod {
      * @return
      */
     public static Map<Character, List<Character>> setFirtToTwoTagsMap() {
-	    Map<Character, List<Character>> firstToTwo = new HashMap<>();
-	    firstToTwo.put('n', Arrays.asList('m', 'v'));
-	    firstToTwo.put('m', Arrays.asList('v', 'n', 'q', 'm'));
-	    firstToTwo.put('s', Arrays.asList('m'));
-	    firstToTwo.put('a', Arrays.asList('m'));
-	    firstToTwo.put('v', Arrays.asList('m'));
-	    return firstToTwo;
+        Map<Character, List<Character>> firstToTwo = new HashMap<>();
+        firstToTwo.put('n', Arrays.asList('m', 'v'));
+        firstToTwo.put('m', Arrays.asList('v', 'n', 'q', 'm'));
+        firstToTwo.put('s', Arrays.asList('m'));
+        firstToTwo.put('a', Arrays.asList('m'));
+        firstToTwo.put('v', Arrays.asList('m'));
+        return firstToTwo;
     }
 	
     /**
